@@ -15,10 +15,11 @@ Gem::Specification.new do |gem|
   gem.test_files    = gem.files.grep(%r{^spec/})
   gem.require_paths = ['app', 'lib']
 
-  gem.add_dependency 'railties'
   gem.add_dependency 'rails'
+  gem.add_dependency 'railties'
 
+  gem.add_development_dependency 'mocha'
   gem.add_development_dependency 'pry'
-  gem.add_development_dependency 'sqlite3'
   gem.add_development_dependency 'rspec'
+  gem.add_development_dependency 'sqlite3'
 end

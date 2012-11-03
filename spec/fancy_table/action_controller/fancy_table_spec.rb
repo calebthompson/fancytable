@@ -15,5 +15,17 @@ describe FancyTable::ActionController::FancyTableMethods do
 
       objects.should respond_to(:fancy_table_headers)
     end
+
+    describe 'objects.fancy_table_headers' do
+      it 'defaults to objects.column_names' do
+        objects = []
+        column_names = [:name, :status, :awesomeness_quotient]
+        objects.stubs(model: mock(column_names: column_names))
+
+        Controller.new.build_fancy_table(objects)
+
+        objects.fancy_table_headers.should eq(column_names)
+      end
+    end
   end
 end
