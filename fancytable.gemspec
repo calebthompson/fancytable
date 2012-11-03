@@ -20,5 +20,5 @@ Gem::Specification.new do |gem|
 
   gem.add_development_dependency 'pry'
   gem.add_development_dependency 'sqlite3'
-  gem.add_dependency 'rspec'
+  gem.add_development_dependency 'rspec'
 end

@@ -1,0 +1,1 @@
+require 'fancy_table/action_controller/fancy_table_methods'

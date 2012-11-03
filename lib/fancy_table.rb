@@ -1,5 +1,2 @@
-require "fancy_table/version"
-
-module FancyTable
-  # Your code goes here...
-end
+require 'fancy_table/version'
+require 'fancy_table/action_controller'
