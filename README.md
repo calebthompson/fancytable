@@ -1,10 +1,15 @@
-fancytable ===========
+fancytable
+===========
+[![Build Status](https://travis-ci.org/calebthompson/fancy_table.png)](https://travis-ci.org/calebthompson/fancy_table)
 
 Tables. Done right.
 
-BOOM! -----
+BOOM!
+-----
 
-```erb <%= fancy_table @firefly_episodes %> ```
+```erb
+<%= fancy_table @firefly_episodes %>
+```
 
 ![fancytable of Firefly
 episodes](https://github.com/calebthompson/fancytable/raw/master/firefly-episodes.png)
@@ -20,7 +25,8 @@ Besides automagic generation of the table from the ActiveRecord::Relation, the
 killer feature is probably sorting on the server-side (_read: vroom!_). This is
 done by clicking on headers and uses SmartOrder (see below).
 
-If it's so easy, how do I do it? --------------------------------
+If it's so easy, how do I do it?
+--------------------------------
 
 Great question. A lot of effort was put into making the developer—that's
 you—happy. To that end, much of fancytable's syntax had been wrapped into two
@@ -28,14 +34,21 @@ calls.
 
 ### _In the controller:_
 
-```ruby def index @firefly_episodes = FireflyEpisode.scoped @firefly_episodes =
-build_fancy_table @firefly_episodes end ```
+```ruby
+def index
+  @firefly_episodes = FireflyEpisode.scoped
+  @firefly_episodes = build_fancy_table @firefly_episodes
+end
+```
 
 ### _Then in a view:_
 
-```haml = fancy_table @firefly_episodes ```
+```haml
+= fancy_table @firefly_episodes
+```
 
-What if I want to do... -----------------------
+What if I want to do...
+-----------------------
 
 We've probably got you covered. Let's take a look at the optional arguments for
 `build_fancy_table` in the controller, and their default values.
@@ -47,7 +60,9 @@ things which do not relate to specific objects, such as creating a new entry.
 
 The format fairly simple:
 
-```ruby actions: { "Link text" => path } ```
+```ruby
+actions: { "Link text" => path }
+```
 
 ### member_actions
 
@@ -56,7 +71,9 @@ These should be used for object-specific actions, such as edit or delete.
 
 Simple actions can be formatted similarly to the `actions` option above:
 
-```ruby member_actions: { "edit" => :edit } ```
+```ruby
+member_actions: { "edit" => :edit }
+```
 
 Which will render a link to `edit_model_path`.
 
@@ -97,7 +114,11 @@ You have a couple of options here. If you plan to use FancyTable extensively
 through your application, you can include SmartOrder in ActiveRecord::Base in an
 initializer:
 
-```ruby class ActiveRecord::Base include SmartOrder::Sortable end ```
+```ruby
+class ActiveRecord::Base
+  include SmartOrder::Sortable
+end
+```
 
 If you are only going to use FancyTable in one or two places—or if you don't
 like the idea of extending Rails core classes, you can include it in specific
