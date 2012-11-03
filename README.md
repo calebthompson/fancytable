@@ -1,8 +1,8 @@
 fancytable
 ===========
-[![Build Status](https://travis-ci.org/calebthompson/fancy_table.png)](https://travis-ci.org/calebthompson/fancy_table)
+[![Build Status](https://travis-ci.org/calebthompson/fancytable.png)](https://travis-ci.org/calebthompson/fancytable)
 
-[![Code Climate](https://codeclimate.com/badge.png)](https://codeclimate.com/github/calebthompson/fancy_table)
+[![Code Climate](https://codeclimate.com/badge.png)](https://codeclimate.com/github/calebthompson/fancytable)
 
 Tables. Done right.
 
