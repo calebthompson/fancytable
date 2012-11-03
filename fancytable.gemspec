@@ -4,15 +4,21 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'fancy_table/version'
 
 Gem::Specification.new do |gem|
-  gem.name          = "fancytable"
+  gem.name          = 'fancytable'
   gem.version       = FancyTable::VERSION
-  gem.authors       = ["Caleb Thompson"]
-  gem.email         = ["cjaysson@gmail.com"]
+  gem.authors       = ['Caleb Thompson']
+  gem.email         = ['cjaysson@gmail.com']
   gem.description   = %q{Happy Simple Fancy Tables}
   gem.summary       = %q{Build HTML5 tables from ActiveRecord::Relations in just a few lines.}
-  gem.homepage      = "calebthompson.github.com/fancytable"
+  gem.homepage      = 'calebthompson.github.com/fancytable'
   gem.files         = `git ls-files`.split($/)
-  gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
-  gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
-  gem.require_paths = ["lib"]
+  gem.test_files    = gem.files.grep(%r{^spec/})
+  gem.require_paths = ['app', 'lib']
+
+  gem.add_dependency 'railties'
+  gem.add_dependency 'rails'
+
+  gem.add_development_dependency 'pry'
+  gem.add_development_dependency 'sqlite3'
+  gem.add_dependency 'rspec'
 end
