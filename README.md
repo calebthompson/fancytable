@@ -2,6 +2,8 @@ fancytable
 ===========
 [![Build Status](https://travis-ci.org/calebthompson/fancy_table.png)](https://travis-ci.org/calebthompson/fancy_table)
 
+[![Code Climate](https://codeclimate.com/badge.png)](https://codeclimate.com/github/calebthompson/fancy_table)
+
 Tables. Done right.
 
 BOOM!
@@ -17,7 +19,7 @@ episodes](https://github.com/calebthompson/fancytable/raw/master/firefly-episode
 Okay, you've piqued my interest. What's going on here?
 -------------------------------------------
 
-FancyTable allows you to easily turn an ActiveRecord::Relation into a semantic
+FancyTable allows you to easily turn an `ActiveRecord::Relation` into a semantic
 HTML5 table which supports sorting, pagination, and links for actions to be
 posted back to the controller.
 
