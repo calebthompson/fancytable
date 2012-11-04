@@ -16,6 +16,12 @@ module FancyTable
     #
     #               This option has no effect when `objects` is not an
     #               `ActiveRecord::Relation`.
+    #   :actions  - The actions which will appear in the `<caption>` of the
+    #               `<table>`. These can be an array of symbols or strings,
+    #               which yield links to [action]_[model_class]_path, or
+    #               a hash in the format `"Link text" => "/path/to/action"`.
+    #
+    #               Defaults to [].
     #
     # * Define `fancy_table_headers`, which is used in the view partials to
     #   display the actual table header, build up sort links, and output fields
@@ -30,14 +36,15 @@ module FancyTable
     def build_fancy_table(objects, options = {})
       define_fancy_table_headers(objects, options[:headers])
       define_fancy_table_order(objects, options[:order_by])
-      define_fancy_table_actions(objects)
+      define_fancy_table_actions(objects, options[:actions])
       objects
     end
 
     private
 
-    def define_fancy_table_actions(objects)
-      objects.define_singleton_method(:fancy_table_actions) { [] }
+    def define_fancy_table_actions(objects, actions)
+      actions ||= []
+      objects.define_singleton_method(:fancy_table_actions) { actions }
     end
 
     def define_fancy_table_order(objects, order_by)

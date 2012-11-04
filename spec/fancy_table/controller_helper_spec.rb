@@ -119,5 +119,31 @@ describe FancyTable::ControllerHelper do
 
       objects.fancy_table_actions.should == []
     end
+
+    it 'uses :actions for :fancy_table_actions when available' do
+      column_names = [:updated_at, :status, :awesomeness_quotient]
+      actions = [:new]
+      objects = []
+
+      FancyTable.build_fancy_table(objects,
+        headers: column_names,
+        actions: actions
+      )
+
+      objects.fancy_table_actions.should == actions
+    end
+
+    it 'accepts a hash for :actions' do
+      column_names = [:updated_at, :status, :awesomeness_quotient]
+      actions = { 'New' => '/new' }
+      objects = []
+
+      FancyTable.build_fancy_table(objects,
+        headers: column_names,
+        actions: actions
+      )
+
+      objects.fancy_table_actions.should == actions
+    end
   end
 end
