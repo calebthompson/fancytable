@@ -20,19 +20,25 @@ module FancyTable
     # * Define `fancy_table_headers`, which is used in the view partials to
     #   display the actual table header, build up sort links, and output fields
     #   into the table for each object.
-    #
     # * Define fancy_table_order, which is the column by which the orders are to
     #   be sorted.
+    # * Define fancy_table_actions, which are the actions added to the `<caption>`
+    #   of the `<table>`.
     #
     # Returns the modified objects variable, but the modifications are made
     # in-place, so you may not need to assign the value.
     def build_fancy_table(objects, options = {})
       define_fancy_table_headers(objects, options[:headers])
       define_fancy_table_order(objects, options[:order_by])
+      define_fancy_table_actions(objects)
       objects
     end
 
     private
+
+    def define_fancy_table_actions(objects)
+      objects.define_singleton_method(:fancy_table_actions) { [] }
+    end
 
     def define_fancy_table_order(objects, order_by)
       order_by ||= sanest_default_order(objects)

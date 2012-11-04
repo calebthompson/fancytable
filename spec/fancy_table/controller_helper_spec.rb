@@ -100,4 +100,24 @@ describe FancyTable::ControllerHelper do
       objects.fancy_table_order.should == :name
     end
   end
+
+  describe 'objects.fancy_table_actions' do
+    it 'defines :fancy_table_actions on objects' do
+      column_names = [:updated_at, :status, :awesomeness_quotient]
+      objects = []
+
+      FancyTable.build_fancy_table(objects, headers: column_names)
+
+      objects.should respond_to(:fancy_table_actions)
+    end
+
+    it 'defaults to an empty array (no actions)' do
+      column_names = [:updated_at, :status, :awesomeness_quotient]
+      objects = []
+
+      FancyTable.build_fancy_table(objects, headers: column_names)
+
+      objects.fancy_table_actions.should == []
+    end
+  end
 end
