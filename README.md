@@ -39,7 +39,7 @@ calls.
 ```ruby
 def index
   @firefly_episodes = FireflyEpisode.scoped
-  @firefly_episodes = build_fancy_table @firefly_episodes
+  @firefly_episodes = FancyTable.build_fancy_table(@firefly_episodes)
 end
 ```
 
@@ -74,19 +74,16 @@ These should be used for object-specific actions, such as edit or delete.
 Simple actions can be formatted similarly to the `actions` option above:
 
 ```ruby
-member_actions: { "edit" => :edit }
+member_actions: [:edit]
 ```
 
-Which will render a link to `edit_model_path`.
+Which will render a link to `edit_model_path` by inferring that you mean to go to
+`[action]_object_path`.
 
-You can also pass a block as the value for more complicated actions:
+You can also pass a hash of member actions, in the format
 
-```ruby
-member_actions: { "complicated" => block_of_code }
-
-def block_of_code(member)
-  # Return a URL
-end
+```
+member_actions: { "Display" => :action }
 ```
 
 By default there are no member actions.
@@ -96,15 +93,39 @@ I don't like how it looks.
 
 Sticks and stones, friend.
 
-While we've included styles for fancytable, we encourage you to roll your own
-that match your site. It will probably turn out better for you in the long run
-if you design your own look‐and‐feel.
+FancyTables are semantic HTML5, so they are just as easy to style as any other
+html `<table>`, and probably easier.
 
-We customized the styles for fancytable for our own site. Here is what the
-previous table would look like for us:
+The basic format of a FancyTable is:
 
-![FancyTable of Firefly
-episodes](https://github.com/calebthompson/fancytable/raw/master/firefly-episodes.png)
+```html
+<table class="fancy-table">
+  <caption>
+    <h2>Users</h2>
+    <div class="actions">
+      <a href="/new_user_path">New User</a>
+    </div>
+  </caption>
+  <thead>
+    <th><a href="?order_by=title">Name</a></th>
+    <th><a href="?order_by=favorite_color">Favorite Color</a></th>
+    <th class="member-action"></th>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <a href="/users/1">Caleb</a>
+      </td>
+      <td>
+        Blue
+      </td>
+      <td class="member-action">
+        <a href="users/1/edit">Edit</a>
+      </td>
+    </tr>
+  </tbody>
+</table>
+```
 
 SmartOrder
 ----------
