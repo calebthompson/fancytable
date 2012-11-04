@@ -10,7 +10,7 @@ describe FancyTable::ControllerHelper do
 
         FancyTable.build_fancy_table(objects)
 
-        objects.fancy_table_headers.should eq(column_names)
+        objects.fancy_table_headers.should == column_names
       end
 
       it 'uses :headers option if passed' do
@@ -19,7 +19,7 @@ describe FancyTable::ControllerHelper do
 
         FancyTable.build_fancy_table(objects, headers: column_names)
 
-        objects.fancy_table_headers.should eq(column_names)
+        objects.fancy_table_headers.should == column_names
       end
     end
   end
@@ -32,6 +32,18 @@ describe FancyTable::ControllerHelper do
       FancyTable.build_fancy_table(objects, headers: column_names)
 
       objects.should respond_to(:fancy_table_order)
+    end
+
+    it 'uses :order_by option if passed' do
+      column_names = [:name, :status, :awesomeness_quotient]
+      objects = []
+
+      FancyTable.build_fancy_table(objects,
+        order_by: :awesomeness_quotient,
+        headers: :column_names
+      )
+
+      objects.fancy_table_order.should == :awesomeness_quotient
     end
   end
 end
