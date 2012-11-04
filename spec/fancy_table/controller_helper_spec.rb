@@ -146,4 +146,50 @@ describe FancyTable::ControllerHelper do
       objects.fancy_table_actions.should == actions
     end
   end
+
+  describe 'objects.fancy_table_member_actions' do
+    it 'defines :fancy_table_member_actions on objects' do
+      column_names = [:updated_at, :status, :awesomeness_quotient]
+      objects = []
+
+      FancyTable.build_fancy_table(objects, headers: column_names)
+
+      objects.should respond_to(:fancy_table_member_actions)
+    end
+
+    it 'defaults to an empty array (no member_actions)' do
+      column_names = [:updated_at, :status, :awesomeness_quotient]
+      objects = []
+
+      FancyTable.build_fancy_table(objects, headers: column_names)
+
+      objects.fancy_table_member_actions.should == []
+    end
+
+    it 'uses :member_actions for :fancy_table_member_actions when available' do
+      column_names = [:updated_at, :status, :awesomeness_quotient]
+      member_actions = [:edit]
+      objects = []
+
+      FancyTable.build_fancy_table(objects,
+        headers: column_names,
+        member_actions: member_actions
+      )
+
+      objects.fancy_table_member_actions.should == member_actions
+    end
+
+    it 'accepts a hash for :member_actions' do
+      column_names = [:updated_at, :status, :awesomeness_quotient]
+      member_actions = { 'Edit' => '/new' }
+      objects = []
+
+      FancyTable.build_fancy_table(objects,
+        headers: column_names,
+        member_actions: member_actions
+      )
+
+      objects.fancy_table_member_actions.should == member_actions
+    end
+  end
 end
