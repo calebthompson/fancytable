@@ -10,16 +10,16 @@ module FancyTable
     #
     # Returns the modified objects variable, but the modifications are made
     # in-place, so you may not need to assign the value.
-    def build_fancy_table(objects)
-      define_fancy_table_headers(objects)
+    def build_fancy_table(objects, options = {})
+      define_fancy_table_headers(objects, options[:headers])
       objects
     end
 
     private
 
-    def define_fancy_table_headers(objects)
-      objects.define_singleton_method(:fancy_table_headers) {
-        model.column_names }
+    def define_fancy_table_headers(objects, headers)
+      headers ||= model_columns(objects)
+      objects.define_singleton_method(:fancy_table_headers) { headers }
     end
 
     def model_columns(objects)
