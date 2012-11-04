@@ -1,2 +1,5 @@
-require 'fancy_table/version'
-require 'fancy_table/action_controller'
+require 'fancy_table/controller_helper'
+
+module FancyTable
+  extend FancyTable::ControllerHelper
+end
