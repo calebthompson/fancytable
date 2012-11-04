@@ -16,10 +16,10 @@ module FancyTable
     #
     #                     This option has no effect when `objects` is not an
     #                     `ActiveRecord::Relation`.
-    #   :actions        - The actions which will appear in the `<caption>` of the
-    #                     `<table>`. These can be an array of symbols or strings,
-    #                     which yield links to [action]_[model_class]_path, or
-    #                     a hash in the format
+    #   :actions        - The actions which will appear in the `<caption>` of
+    #                     the `<table>`. These can be an array of symbols or
+    #                     strings, which yield links to
+    #                     [action]_[model_class]_path, or a hash in the format
     #                     `"Link text" => "/path/to/action"`.
     #
     #                     Defaults to [].
@@ -36,14 +36,15 @@ module FancyTable
     #   into the table for each object.
     # * Define fancy_table_order, which is the column by which the orders are to
     #   be sorted.
-    # * Define fancy_table_actions, which are the actions added to the `<caption>`
-    #   of the `<table>`.
+    # * Define fancy_table_actions, which are the actions added to the
+    #   `<caption>` of the `<table>`.
     # * Define fancy_table_member_actions, which are the actions added to each
     #   object's `<tr>` as links.
     #
     # Returns the modified objects variable, but the modifications are made
     # in-place, so you may not need to assign the value.
     def build_fancy_table(objects, options = {})
+      define_fancy_table_title(objects)
       define_fancy_table_headers(objects, options[:headers])
       define_fancy_table_order(objects, options[:order_by])
       define_fancy_table_actions(objects, options[:actions])
@@ -52,6 +53,10 @@ module FancyTable
     end
 
     private
+
+    def define_fancy_table_title(objects)
+      objects.define_singleton_method(:fancy_table_title) { '' }
+    end
 
     def define_fancy_table_headers(objects, headers)
       headers ||= model_columns(objects)

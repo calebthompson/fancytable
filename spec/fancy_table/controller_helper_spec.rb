@@ -8,6 +8,7 @@ describe FancyTable::ControllerHelper do
 
       FancyTable.build_fancy_table(objects, headers: column_names)
 
+      objects.should respond_to(:fancy_table_title)
       objects.should respond_to(:fancy_table_order)
       objects.should respond_to(:fancy_table_headers)
       objects.should respond_to(:fancy_table_actions)
