@@ -12,10 +12,15 @@ module FancyTable
     # in-place, so you may not need to assign the value.
     def build_fancy_table(objects, options = {})
       define_fancy_table_headers(objects, options[:headers])
+      define_fancy_table_order(objects)
       objects
     end
 
     private
+
+    def define_fancy_table_order(objects)
+      objects.define_singleton_method(:fancy_table_order) { nil }
+    end
 
     def define_fancy_table_headers(objects, headers)
       headers ||= model_columns(objects)

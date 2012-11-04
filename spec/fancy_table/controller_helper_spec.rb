@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe FancyTable::ControllerHelper do
-  describe '#build_fancy_table' do
+  describe '#build_fancy_table additions to the collection' do
     describe 'objects.fancy_table_headers' do
       it 'defaults to objects.column_names' do
         column_names = [:name, :status, :awesomeness_quotient]
@@ -21,6 +21,17 @@ describe FancyTable::ControllerHelper do
 
         objects.fancy_table_headers.should eq(column_names)
       end
+    end
+  end
+
+  describe 'objects.fancy_table_order' do
+    it 'defines #fancy_table_order on objects' do
+      column_names = [:name, :status, :awesomeness_quotient]
+      objects = []
+
+      FancyTable.build_fancy_table(objects, headers: column_names)
+
+      objects.should respond_to(:fancy_table_order)
     end
   end
 end
