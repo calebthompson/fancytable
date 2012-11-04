@@ -2,6 +2,17 @@ require 'spec_helper'
 
 describe FancyTable::ControllerHelper do
   describe '#build_fancy_table additions to the collection' do
+    it 'defines useful methods on objects' do
+      column_names = [:name, :status, :awesomeness_quotient]
+      objects = []
+
+      FancyTable.build_fancy_table(objects, headers: column_names)
+
+      objects.should respond_to(:fancy_table_order)
+      objects.should respond_to(:fancy_table_headers)
+      objects.should respond_to(:fancy_table_actions)
+      objects.should respond_to(:fancy_table_member_actions)
+    end
     describe 'objects.fancy_table_headers' do
       it 'defaults to objects.column_names' do
         column_names = [:name, :status, :awesomeness_quotient]
@@ -25,15 +36,6 @@ describe FancyTable::ControllerHelper do
   end
 
   describe 'objects.fancy_table_order' do
-    it 'defines #fancy_table_order on objects' do
-      column_names = [:name, :status, :awesomeness_quotient]
-      objects = []
-
-      FancyTable.build_fancy_table(objects, headers: column_names)
-
-      objects.should respond_to(:fancy_table_order)
-    end
-
     it 'uses :order_by option if passed' do
       column_names = [:name, :status, :awesomeness_quotient]
       objects = []
@@ -102,15 +104,6 @@ describe FancyTable::ControllerHelper do
   end
 
   describe 'objects.fancy_table_actions' do
-    it 'defines :fancy_table_actions on objects' do
-      column_names = [:updated_at, :status, :awesomeness_quotient]
-      objects = []
-
-      FancyTable.build_fancy_table(objects, headers: column_names)
-
-      objects.should respond_to(:fancy_table_actions)
-    end
-
     it 'defaults to an empty array (no actions)' do
       column_names = [:updated_at, :status, :awesomeness_quotient]
       objects = []
@@ -148,15 +141,6 @@ describe FancyTable::ControllerHelper do
   end
 
   describe 'objects.fancy_table_member_actions' do
-    it 'defines :fancy_table_member_actions on objects' do
-      column_names = [:updated_at, :status, :awesomeness_quotient]
-      objects = []
-
-      FancyTable.build_fancy_table(objects, headers: column_names)
-
-      objects.should respond_to(:fancy_table_member_actions)
-    end
-
     it 'defaults to an empty array (no member_actions)' do
       column_names = [:updated_at, :status, :awesomeness_quotient]
       objects = []
