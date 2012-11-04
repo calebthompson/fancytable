@@ -45,5 +45,59 @@ describe FancyTable::ControllerHelper do
 
       objects.fancy_table_order.should == :awesomeness_quotient
     end
+
+    it 'defaults to :name if available' do
+      column_names = [:name, :status, :awesomeness_quotient]
+      objects = []
+
+      FancyTable.build_fancy_table(objects, headers: column_names)
+
+      objects.fancy_table_order.should == :name
+    end
+
+    it 'defaults to :title if available' do
+      column_names = [:title, :status, :awesomeness_quotient]
+      objects = []
+
+      FancyTable.build_fancy_table(objects, headers: column_names)
+
+      objects.fancy_table_order.should == :title
+    end
+
+    it 'defaults to :created_at if available' do
+      column_names = [:created_at, :status, :awesomeness_quotient]
+      objects = []
+
+      FancyTable.build_fancy_table(objects, headers: column_names)
+
+      objects.fancy_table_order.should == :created_at
+    end
+
+    it 'defaults to :updated_at if available' do
+      column_names = [:updated_at, :status, :awesomeness_quotient]
+      objects = []
+
+      FancyTable.build_fancy_table(objects, headers: column_names)
+
+      objects.fancy_table_order.should == :updated_at
+    end
+
+    it 'defaults to :id if available' do
+      column_names = [:id, :status, :awesomeness_quotient]
+      objects = []
+
+      FancyTable.build_fancy_table(objects, headers: column_names)
+
+      objects.fancy_table_order.should == :id
+    end
+
+    it 'defaults to :name before all other defaults' do
+      column_names = [:id, :updated_at, :created_at, :title, :name]
+      objects = []
+
+      FancyTable.build_fancy_table(objects, headers: column_names)
+
+      objects.fancy_table_order.should == :name
+    end
   end
 end
