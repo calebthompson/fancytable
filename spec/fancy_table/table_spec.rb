@@ -23,18 +23,42 @@ describe FancyTable::Table do
 
     it 'builds a th for each header in the thead' do
       doc = Nokogiri::HTML(table)
+
       fake_objects.fancy_table_headers.map{ |h| h.to_s.titleize }.each do |header|
         doc.css('thead th').text.should include(header)
+      end
+    end
+
+    it 'builds a tr for each object' do
+      3.times { fake_objects << object }
+      table.should have_css('tbody tr').count(3)
+    end
+
+
+    it "populates a td for each header in the objects' tr" do
+      fake_objects << object
+      doc = Nokogiri::HTML(table)
+
+      fake_objects.fancy_table_headers.each do |column|
+        doc.css('tbody tr td').text.should include(column.to_s)
       end
     end
   end
 end
 
 def fake_objects
-  @objects ||= -> do
+  @objects ||= -> {
     objects = []
     objects.stubs(fancy_table_title: 'Objects')
     objects.stubs(fancy_table_headers: [:foo, :bar, :baz])
     objects
-  end.call
+  }.call
+end
+
+def object
+  @object ||= -> {
+    obj = OpenStruct.new
+    fake_objects.fancy_table_headers.each { |col| obj.send("#{col}=", col.to_s) }
+    obj
+  }.call
 end

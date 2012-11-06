@@ -9,9 +9,15 @@ class HasCss
     @selector = selector
   end
 
+  def count(num)
+    @count = num
+    self
+  end
+
   def matches?(target)
     @target = target
-    document.css(@selector).any?
+    document.css(@selector).any? &&
+      count_matches
   end
 
   def failure_message
@@ -26,5 +32,13 @@ class HasCss
 
   def document
     Nokogiri::HTML(@target)
+  end
+
+  def count_matches
+    if @count
+      document.css(@selector).count == @count
+    else
+      true
+    end
   end
 end

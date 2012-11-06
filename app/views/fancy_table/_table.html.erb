@@ -9,4 +9,13 @@
       <% end %>
     </tr>
   </thead>
+  <tbody>
+    <% objects.each do |object| %>
+      <tr>
+        <% objects.fancy_table_headers.each do |header| %>
+          <td><%= object.send(header) %></td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
 </table>
