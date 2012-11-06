@@ -5,3 +5,5 @@ rvm:
   - ruby-head
 notifications:
   email: false
+before_install:
+  - gem install nokogiri -- --with-cflags='--std=gnu99'
