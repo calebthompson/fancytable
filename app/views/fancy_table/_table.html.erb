@@ -5,8 +5,7 @@
   <thead>
     <tr>
       <% objects.fancy_table_headers.each do |header| %>
-        <th>
-        </th>
+        <th><%= header.to_s.titleize %></th>
       <% end %>
     </tr>
   </thead>

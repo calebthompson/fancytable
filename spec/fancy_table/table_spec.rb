@@ -22,8 +22,9 @@ describe FancyTable::Table do
     end
 
     it 'builds a th for each header in the thead' do
-      fake_objects.fancy_table_headers.each do |header|
-        table.should have_css(%{thead th})
+      doc = Nokogiri::HTML(table)
+      fake_objects.fancy_table_headers.map{ |h| h.to_s.titleize }.each do |header|
+        doc.css('thead th').text.should include(header)
       end
     end
   end
